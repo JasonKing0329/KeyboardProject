@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Keyboard height="@dimen/tv_kbd_height"
+    background="@color/kbd_symbol_bg"
+    keyWidth="25%p"
+    rowHeight="@dimen/symbol_key_height"
+    keyTextColor="@color/kbd_symbol_text"
+    keyBackground="@drawable/btn_kbd_symbol"
+    divider="@dimen/kbd_symbol_divider">
+    <Row>
+        <Key code="1" text="1"/>
+        <Key code="2" text="2"/>
+        <Key code="3" text="3"/>
+        <Key code="Delete" src="@drawable/kbd_key_delete" imgWidth="@dimen/symbol_delete_size" imgHeight="@dimen/symbol_delete_size"/>
+    </Row>
+    <Row>
+        <Key code="4" text="4"/>
+        <Key code="5" text="5"/>
+        <Key code="6" text="6"/>
+        <Key code="Clear" text="@string/kbd_clear"/>
+    </Row>
+    <Row>
+        <Key code="7" text="7"/>
+        <Key code="8" text="8"/>
+        <Key code="9" text="9"/>
+        <Key code="-" text="-"/>
+    </Row>
+    <Row>
+        <Key code="Switch" text="@string/kbd_switch_abc"/>
+        <Key code="0" text="0"/>
+        <Key code="." text="."/>
+        <Key code="Done" text="@string/kbd_complete"/>
+    </Row>
+</Keyboard>

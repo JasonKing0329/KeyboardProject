@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <color name="kbd_qwerty_bg">#d2d5db</color>
+    <color name="kbd_qwerty_text">#3c3c3c</color>
+    <color name="kbd_symbol_bg">#8c8c8c</color>
+    <color name="kbd_symbol_key_bg">#ffffff</color>
+    <color name="kbd_symbol_text">#3c3c3c</color>
+    <color name="kbd_symbol_key_press_bg">#c4c9d3</color>
+    <color name="kbd_candidate_bg">#aa333333</color>
+</resources>

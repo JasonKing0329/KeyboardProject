@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Keyboard height="@dimen/tv_kbd_height"
+    background="@color/kbd_qwerty_bg"
+    keyWidth="10%p"
+    rowHeight="@dimen/qwerty_key_height"
+    keyTextColor="@color/kbd_qwerty_text"
+    keyBackground="@drawable/btn_kbd_qwerty"
+    keyMargin="@dimen/kbd_qwerty_key_margin">
+    <Row marginTop="3dp">
+        <Key code="q" text="q"/>
+        <Key code="w" text="w"/>
+        <Key code="e" text="e"/>
+        <Key code="r" text="r"/>
+        <Key code="t" text="t"/>
+        <Key code="y" text="y"/>
+        <Key code="u" text="u"/>
+        <Key code="i" text="i"/>
+        <Key code="o" text="o"/>
+        <Key code="p" text="p"/>
+    </Row>
+    <Row marginTop="7dp">
+        <Key code="a" text="a"/>
+        <Key code="s" text="s"/>
+        <Key code="d" text="d"/>
+        <Key code="f" text="f"/>
+        <Key code="g" text="g"/>
+        <Key code="h" text="h"/>
+        <Key code="j" text="j"/>
+        <Key code="k" text="k"/>
+        <Key code="l" text="l"/>
+        <Key code="Clear" text="@string/kbd_clear_qwerty"/>
+    </Row>
+    <Row marginTop="7dp" marginBottom="3dp">
+        <Key code="Switch" text="@string/kbd_switch_num" keyWidth="15%p"/>
+        <Key code="z" text="z"/>
+        <Key code="x" text="x"/>
+        <Key code="c" text="c"/>
+        <Key code="v" text="v"/>
+        <Key code="b" text="b"/>
+        <Key code="n" text="n"/>
+        <Key code="m" text="m"/>
+        <Key code="Delete" src="@drawable/kbd_key_delete" imgWidth="@dimen/symbol_delete_size" imgHeight="@dimen/symbol_delete_size" keyWidth="15%p"/>
+    </Row>
+</Keyboard>
