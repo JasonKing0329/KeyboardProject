@@ -1,6 +1,6 @@
 package com.jing.lib.keyboard.controller;
 
-import android.app.Activity;
+import android.content.Context;
 import android.widget.EditText;
 
 import com.jing.lib.keyboard.action.InputAction;
@@ -12,36 +12,40 @@ import com.jing.lib.keyboard.action.UIAction;
 import com.jing.lib.keyboard.provider.KeyboardParams;
 
 /**
- * Created by JingYang on 2016/6/21 0021.
- * 核心控制类
+ * 描述: 核心控制器，调度UI和INPUT部分
  * 调度InputAction与UiAction的关键方法，并处理其事件回调
  * OnKeyClickListener回调UiAction触发的按键类型，将keyCode分发给InputAction处理按键事件
  * KeyboardHandler回调InputAction处理的按键事件，将Ui变化反馈给UiAction，交互变化反馈给注册的OnKeyboardActionListener
+ * <p/>作者：景阳
+ * <p/>创建时间: 2017/3/17 10:10
  */
-public class CoreController implements KeyboardHandler, OnKeyClickListener {
+public abstract class BaseCoreController implements KeyboardHandler, OnKeyClickListener {
 
-    private final String TAG = "CoreController";
+    private final String TAG = "BaseCoreController";
+
     /**
      * 输入控制器
      */
     private InputAction mInputAction;
-
     /**
      * UI控制器
      */
     private UIAction mUiAction;
 
-    private OnKeyboardActionListener mOnKeyboardActionListener;
-
     private EditText mEditText;
 
-    public CoreController(Activity activity) {
+    private OnKeyboardActionListener mOnKeyboardActionListener;
+
+    public BaseCoreController(Context context) {
+
         // 初始化输入控制器与UI控制器，注册回调
-        mUiAction = new UIController(activity);
+        mUiAction = createUiAction(context);
         mUiAction.setOnKeyClickListener(this);
         mInputAction = new InputController();
         mInputAction.setKeyboardHandler(this);
     }
+
+    protected abstract UIAction createUiAction(Context context);
 
     /**
      * 设置系统外需要回调的事件（比如按键"Done"）
@@ -72,20 +76,6 @@ public class CoreController implements KeyboardHandler, OnKeyClickListener {
     public void updateEditText(EditText edit) {
         mEditText = edit;
         mInputAction.updateEditText(edit);
-    }
-
-    /**
-     * 显示键盘（已初始化过键盘）
-     */
-    public void showExistedKeyboard() {
-        mUiAction.showExistedKeyboard();
-    }
-
-    /**
-     * 显示Inputable规定的默认键盘（已初始化过键盘）
-     */
-    public void showExistedDefaultKeyboard() {
-        mUiAction.showExistedDefaultKeyboard();
     }
 
     /**

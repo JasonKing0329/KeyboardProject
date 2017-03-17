@@ -2,11 +2,8 @@ package com.jing.lib.keyboard.controller;
 
 import com.jing.lib.keyboard.R;
 import com.jing.lib.keyboard.action.CandidateListener;
-import com.jing.lib.keyboard.action.Inputable;
-import com.jing.lib.keyboard.action.OnKeyClickListener;
 import com.jing.lib.keyboard.action.UIAction;
 import com.jing.lib.keyboard.provider.KeyboardParams;
-import com.jing.lib.keyboard.view.AbsKeyboardView;
 import com.jing.lib.keyboard.view.CandidateView;
 import com.jing.lib.keyboard.view.Keyboard;
 import com.jing.lib.keyboard.view.layout.LayoutKeyboardView;
@@ -17,18 +14,15 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
- * UI控制器
+ * 描述: 弹出式键盘的UI控制器，公共操作由BaseUIController完成
  * @author 景阳
- *
+ * 利用往decorView添加布局的方式将键盘嵌入到当前activity所属的decorView层级中
+ * 支持遮盖、挤压、平移三种弹出方式
  */
-public class UIController implements UIAction {
+public class PopUIController extends BaseUIController implements UIAction {
 
 	private final String TAG = "KeyboardManager";
 	/**
@@ -47,30 +41,14 @@ public class UIController implements UIAction {
 	 * 屏幕宽度
 	 */
 	private static int mScreenWidth;
-	
-	private Context mContext;
-	private AbsKeyboardView mKeyboardView;
+
 	private CandidateView mCandidateView;
 
-	private EditText mEditText;
 	// DecorView的主要内容布局
 	private View mContentView;
-	private Inputable mInputable;
 
-	// 键盘xml资源
-	private int[] keyboardXmls;
-
-	// 当前的键盘种类，范围在keyboardXmls的length以内
-	private int curKbdIndex;
-
-	private Map<Integer, Keyboard> keyboardMap;
-
-	public UIController(Context context) {
-		mContext = context;
-		mKeyboardView = new LayoutKeyboardView(context);
-		mCandidateView = new CandidateView(context);
-		mKeyboardView.setCandidateView(mCandidateView);
-		keyboardMap = new HashMap<>();
+	public PopUIController(Context context) {
+		super(context);
 		
 		mCandidateHeight = context.getResources().getDimensionPixelSize(R.dimen.tv_kbd_candidate_height);
 		mKbdHeight = context.getResources().getDimensionPixelSize(R.dimen.tv_kbd_height);
@@ -78,23 +56,6 @@ public class UIController implements UIAction {
 		mScreenWidth = getScreenWidth(context);
 	}
 
-	@Override
-	public void setKeyboardXmls(int[] keyboardXmlResource, int defaultIndex) {
-		keyboardXmls = keyboardXmlResource;
-		curKbdIndex = defaultIndex;
-	}
-
-	@Override
-	public AbsKeyboardView getKeyboardView() {
-		return mKeyboardView;
-	}
-
-	@Override
-	public void setInputable(Inputable inputable) {
-		mInputable = inputable;
-	}
-
-	@Override
 	public void showExistedKeyboard() {
 		if (mKeyboardView instanceof CandidateListener) {
 			((CandidateListener) mKeyboardView).onCandidateTextChanged(mEditText.getText().toString());
@@ -103,7 +64,6 @@ public class UIController implements UIAction {
 		updateContentView();
 	}
 
-	@Override
 	public void showExistedDefaultKeyboard() {
 		switchToKeyboard(keyboardXmls[mInputable.getPopupKeyboardIndex()]);
 		if (mKeyboardView instanceof CandidateListener) {
@@ -171,13 +131,16 @@ public class UIController implements UIAction {
 	@Override
 	public void initKeyboard() {
 
-		Keyboard keyboard = new KeyboardController().initKeyboard(mContext, keyboardXmls[curKbdIndex]);
+		mKeyboardView = new LayoutKeyboardView(getContext());
+		mCandidateView = new CandidateView(getContext());
+		mKeyboardView.setCandidateView(mCandidateView);
+		int xmlId = keyboardXmls[curKbdIndex];
+		Keyboard keyboard = new KeyboardController().initKeyboard(getContext(), xmlId);
+		mKeyboardView.setOnKeyClickListener(onKeyClickListener);
 		// 保存keyboard view实例，用于切换
-		keyboardMap.put(keyboardXmls[curKbdIndex], keyboard);
-
+		keyboardMap.put(xmlId, keyboard);
 		mKeyboardView.setKeyboard(keyboard);
-
-		View mDecorView = ((Activity) mContext).getWindow().getDecorView();
+		View mDecorView = ((Activity) getContext()).getWindow().getDecorView();
 		ViewGroup decorGroup = (ViewGroup) mDecorView;
 		mContentView = decorGroup.getChildAt(0);
 
@@ -192,10 +155,10 @@ public class UIController implements UIAction {
 		updateContentView();
 
 		mKeyboardView.post(new Runnable() {
-			
+
 			@Override
 			public void run() {
-				View mDecorView = ((Activity) mContext).getWindow().getDecorView();
+				View mDecorView = ((Activity) getContext()).getWindow().getDecorView();
 				ViewGroup decorGroup = (ViewGroup) mDecorView;
 				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
 						FrameLayout.LayoutParams.WRAP_CONTENT, mCandidateHeight);
@@ -227,33 +190,6 @@ public class UIController implements UIAction {
 		DisplayMetrics dm = new DisplayMetrics();
 		((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(dm);
 		return dm.widthPixels;
-	}
-
-	@Override
-	public void setEditText(EditText edit) {
-		mEditText = edit;
-	}
-
-	@Override
-	public void onSwitchKeyboardType() {
-		curKbdIndex ++;
-		if (curKbdIndex >= keyboardXmls.length) {
-			curKbdIndex = 0;
-		}
-		switchToKeyboard(keyboardXmls[curKbdIndex]);
-	}
-
-	private void switchToKeyboard(int xmlId) {
-		if (keyboardMap.get(xmlId) == null) {
-			Keyboard keyboard = new KeyboardController().initKeyboard(mContext, xmlId);
-			keyboardMap.put(xmlId, keyboard);
-		}
-		mKeyboardView.onSwitchKeyboardType(keyboardMap.get(xmlId));
-	}
-
-	@Override
-	public void setOnKeyClickListener(OnKeyClickListener listener) {
-		mKeyboardView.setOnKeyClickListener(listener);
 	}
 
 }

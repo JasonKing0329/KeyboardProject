@@ -19,6 +19,9 @@ import com.jing.lib.keyboard.view.Keyboard;
 import com.jing.lib.keyboard.view.layout.LayoutImageKey;
 import com.jing.lib.keyboard.view.layout.LayoutTextKey;
 
+/**
+ * 键盘内容解析器，读取xml文件，转换为Keyboard由KeyboardView生成UI
+ */
 public class KeyboardParser {
 
 	public void parseKeyboard(Keyboard keyboard, int xmlId) throws XmlPullParserException, IOException {

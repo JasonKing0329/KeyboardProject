@@ -1,17 +1,15 @@
 package com.jing.lib.keyboard.provider;
 
 import android.app.Activity;
+import android.content.Context;
 import android.text.InputType;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 
 import com.jing.lib.keyboard.action.Inputable;
-import com.jing.lib.keyboard.action.KeyboardBinder;
-import com.jing.lib.keyboard.action.OnKeyboardActionListener;
-import com.jing.lib.keyboard.controller.PopCoreController;
+import com.jing.lib.keyboard.controller.EmbedCoreController;
 import com.jing.lib.keyboard.view.AbsKeyboardView;
 
 import java.lang.reflect.InvocationTargetException;
@@ -20,58 +18,65 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2016/6/21 0021.
+ * 描述: 嵌入式键盘的绑定器，将JKeyboardView关联到多个EditText
+ * <p/>作者：景阳
+ * <p/>创建时间: 2017/3/17 11:00
  */
-public class KeyboardUtil implements KeyboardBinder {
-
-
-    private Activity mActivity;
+public class JKeyboardBinder {
 
     private final String TAG = "KeyboardUtil";
     private EditText mEditText;
+
+    private Context mContext;
+
     private TriggerListener mTriggerListener;
-
-    private boolean isKbdShowing;
-
-    private PopCoreController mController;
 
     private int[] keyboardXmlRes;
 
     private Map<EditText, Inputable> inputableMap;
 
-    public KeyboardUtil(Activity activity) {
-        mActivity = activity;
+    private EmbedCoreController mController;
+
+    public JKeyboardBinder(Context context) {
+        mContext = context;
         mTriggerListener = new TriggerListener();
         inputableMap = new HashMap<>();
-        mController = new PopCoreController(activity);
+        mController = new EmbedCoreController(context);
     }
 
-    @Override
-    public void setOnKeyboardActionListener(OnKeyboardActionListener listener) {
-        mController.setOnKeyboardActionListener(listener);
-    }
-
-    @Override
-    public void bindEditText(EditText editText, Inputable inputable) {
-
-        inputableMap.put(editText, inputable);
-        editText.setOnTouchListener(mTriggerListener);
-    }
-
-    @Override
-    public boolean hideKeyboard() {
-        Log.d(TAG, "hideKeyboard");
-        if (isKbdShowing) {
-            isKbdShowing = false;
-            return mController.hideKeyboard();
-        }
-        return false;
-    }
-
+    /**
+     * 设置可切换键盘资源
+     * @param xmlIds
+     */
     public void setXmlResources(int[] xmlIds) {
         keyboardXmlRes = xmlIds;
     }
 
+    /**
+     * 绑定editText与keyboardView
+     * @param editText
+     * @param keyboardView
+     * @param inputable
+     */
+    public void bindEditText(EditText editText, AbsKeyboardView keyboardView, Inputable inputable) {
+
+        mController.setKeyboardView(keyboardView);
+        inputableMap.put(editText, inputable);
+        editText.setOnTouchListener(mTriggerListener);
+    }
+
+    /**
+     * 初始化键盘
+     * @param defaultIndex
+     */
+    private void initKeyboard(int defaultIndex) {
+        mController.setKeyboardXmlResource(keyboardXmlRes, defaultIndex);
+        mController.initKeyboard();
+    }
+
+    /**
+     * EditText的touch事件监听，屏蔽系统键盘的弹出
+     */
     private class TriggerListener implements View.OnTouchListener {
 
         @Override
@@ -86,30 +91,10 @@ public class KeyboardUtil implements KeyboardBinder {
             if (android.os.Build.VERSION.SDK_INT < 14) {
                 edit.setInputType(InputType.TYPE_NULL);
             }
-            hideSoftInputMethod(mActivity, edit);
+            hideSoftInputMethod((Activity) mContext, edit);
 
-            // 初始化键盘
-            if (mEditText == null) {
-                mEditText = edit;
-                mController.setInputable(inputableMap.get(edit));
-                initKeyboard(inputableMap.get(edit).getPopupKeyboardIndex());
-            }
-            else {
-                // 重复点击当前绑定的EditText
-                if (editText == mEditText) {
-                    // 执行过返回键隐藏键盘
-                    if (!isKbdShowing) {
-                        showExistedKeyboard();
-                    }
-                }
-                // 切换EditText
-                else {
-                    mController.updateEditText(edit);
-                    mController.setInputable(inputableMap.get(edit));
-                    showExistedDefaultKeyboard();
-                }
-
-            }
+            // 显示KeyboardView
+            showKeyboard(edit);
 
             if (android.os.Build.VERSION.SDK_INT < 14) {
                 edit.setInputType(type);
@@ -121,23 +106,35 @@ public class KeyboardUtil implements KeyboardBinder {
 
     }
 
-    private void showExistedKeyboard() {
-        Log.d(TAG, "showExistedKeyboard");
-        isKbdShowing = true;
-        mController.showExistedKeyboard();
+    public void showKeyboard(EditText edit) {
+        // 初始化键盘
+        if (mEditText == null) {
+            mEditText = edit;
+            mController.setEditText(edit);
+            mController.setInputable(inputableMap.get(edit));
+            initKeyboard(inputableMap.get(edit).getPopupKeyboardIndex());
+        }
+        else {
+            // 重复点击当前绑定的EditText
+            if (edit == mEditText) {
+                // 无操作
+            }
+            // 切换EditText
+            else {
+                mController.updateEditText(edit);
+                mController.setInputable(inputableMap.get(edit));
+                // 刷新keyboard view，如键盘类型发生改变，重新加载
+                refreshKeyboardView();
+            }
+
+        }
     }
 
-    private void showExistedDefaultKeyboard() {
-        Log.d(TAG, "showExistedDefaultKeyboard");
-        isKbdShowing = true;
-        mController.showExistedDefaultKeyboard();
-    }
-
-    private void initKeyboard(int defaultIndex) {
-
-        isKbdShowing = true;
-        mController.setKeyboardXmlResource(keyboardXmlRes, defaultIndex);
-        mController.initKeyboard();
+    /**
+     * 刷新键盘，重新读取键盘类型
+     */
+    private void refreshKeyboardView() {
+        mController.refreshKeyboard();
     }
 
     //禁用系统输入法
@@ -177,6 +174,4 @@ public class KeyboardUtil implements KeyboardBinder {
             }
         }
     }
-
-
 }

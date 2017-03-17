@@ -1,5 +1,8 @@
 package com.jing.lib.keyboard.parser;
 
+/**
+ * xml文件遵守的关键词
+ */
 public class KeyboardTag {
 
 	public static final String KEYBOARD = "Keyboard";

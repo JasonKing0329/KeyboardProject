@@ -4,11 +4,16 @@ import com.jing.lib.keyboard.view.AbsKeyboardView;
 import com.jing.lib.keyboard.view.Keyboard;
 
 import android.content.Context;
+import android.util.AttributeSet;
 
 public class LayoutKeyboardView extends AbsKeyboardView {
 
 	public LayoutKeyboardView(Context context) {
 		super(context);
+	}
+
+	public LayoutKeyboardView(Context context, AttributeSet attr) {
+		super(context, attr);
 	}
 
 	@Override
