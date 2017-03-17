@@ -22,12 +22,12 @@ import java.util.Map;
 /**
  * Created by Administrator on 2016/6/21 0021.
  */
-public class KeyboardUtil implements KeyboardBinder {
+public class JKeyboardUtil implements KeyboardBinder {
 
 
     private Activity mActivity;
 
-    private final String TAG = "KeyboardUtil";
+    private final String TAG = "JKeyboardUtil";
     private EditText mEditText;
     private TriggerListener mTriggerListener;
 
@@ -39,7 +39,7 @@ public class KeyboardUtil implements KeyboardBinder {
 
     private Map<EditText, Inputable> inputableMap;
 
-    public KeyboardUtil(Activity activity) {
+    public JKeyboardUtil(Activity activity) {
         mActivity = activity;
         mTriggerListener = new TriggerListener();
         inputableMap = new HashMap<>();

@@ -4,8 +4,7 @@ import com.jing.lib.keyboard.action.CandidateListener;
 import com.jing.lib.keyboard.action.Inputable;
 import com.jing.lib.keyboard.action.InputAction;
 import com.jing.lib.keyboard.action.KeyboardHandler;
-import com.jing.lib.keyboard.provider.KeyboardParams;
-import com.jing.lib.keyboard.view.AbsKeyboardView;
+import com.jing.lib.keyboard.provider.JKeyboardParams;
 
 import android.text.Editable;
 import android.util.Log;
@@ -61,21 +60,21 @@ public class InputController implements InputAction {
 
 	private void recordInput(String keyCode) {
 		// 清除
-		if (KeyboardParams.KEYCODE_CLEAR.equals(keyCode)) {
+		if (JKeyboardParams.KEYCODE_CLEAR.equals(keyCode)) {
 			mRecordBuffer = new StringBuffer();
 		}
 		// 删除
-		else if (KeyboardParams.KEYCODE_DELETE.equals(keyCode)) {
+		else if (JKeyboardParams.KEYCODE_DELETE.equals(keyCode)) {
 			if (mRecordBuffer.length() > 0) {
 				mRecordBuffer.deleteCharAt(mRecordBuffer.length() - 1);
 			}
 		}
 		// 切换
-		else if (KeyboardParams.KEYCODE_SWITCH.equals(keyCode)) {
+		else if (JKeyboardParams.KEYCODE_SWITCH.equals(keyCode)) {
 			mKeyboardHandler.onSwitchKeyboard();
 		}
 		// 完成
-		else if (KeyboardParams.KEYCODE_DONE.equals(keyCode)) {
+		else if (JKeyboardParams.KEYCODE_DONE.equals(keyCode)) {
 			mKeyboardHandler.onDone(mRecordBuffer.toString());
 			mRecordBuffer = new StringBuffer();
 		}
@@ -88,7 +87,7 @@ public class InputController implements InputAction {
 			}
 
 			// 数字键盘
-			if (mInputable.getInputType() == KeyboardParams.INPUTTYPE_NUM) {
+			if (mInputable.getInputType() == JKeyboardParams.INPUTTYPE_NUM) {
 
 				// 小数点只允许出现一次
 				if (".".equals(keyCode)) {
@@ -138,11 +137,11 @@ public class InputController implements InputAction {
 		int start = mEditText.getSelectionStart();
 		
 		// 清除
-		if (KeyboardParams.KEYCODE_CLEAR.equals(keyCode)) {
+		if (JKeyboardParams.KEYCODE_CLEAR.equals(keyCode)) {
 			mEditText.setText("");
 		}
 		// 删除
-		else if (KeyboardParams.KEYCODE_DELETE.equals(keyCode)) {
+		else if (JKeyboardParams.KEYCODE_DELETE.equals(keyCode)) {
 			if (editable != null && editable.length() > 0) {
 				if (start > 0) {
 					editable.delete(start - 1, start);
@@ -150,11 +149,11 @@ public class InputController implements InputAction {
 			}
 		}
 		// 切换
-		else if (KeyboardParams.KEYCODE_SWITCH.equals(keyCode)) {
+		else if (JKeyboardParams.KEYCODE_SWITCH.equals(keyCode)) {
 			mKeyboardHandler.onSwitchKeyboard();;
 		}
 		// 完成
-		else if (KeyboardParams.KEYCODE_DONE.equals(keyCode)) {
+		else if (JKeyboardParams.KEYCODE_DONE.equals(keyCode)) {
 //			if (mOnKbdActionListener != null) {
 //				mOnKbdActionListener.onKeyboardDone(mEditText, null);
 //			}
@@ -169,7 +168,7 @@ public class InputController implements InputAction {
 
 			String text = mEditText.getText().toString();
 			// 数字键盘
-			if (mInputable.getInputType() == KeyboardParams.INPUTTYPE_NUM) {
+			if (mInputable.getInputType() == JKeyboardParams.INPUTTYPE_NUM) {
 
 				// 小数点只允许出现一次
 				if (".".equals(keyCode)) {

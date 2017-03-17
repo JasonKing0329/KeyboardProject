@@ -3,7 +3,7 @@ package com.jing.lib.keyboard.provider;
 /**
  * Created by Administrator on 2016/6/21 0021.
  */
-public class KeyboardParams {
+public class JKeyboardParams {
     public static final String TYPE_NUM = "kbd_type_num";
     public static final String TYPE_QWERTY = "kbd_type_qwerty";
 

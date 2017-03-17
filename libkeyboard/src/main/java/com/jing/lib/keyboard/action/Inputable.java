@@ -1,7 +1,7 @@
 package com.jing.lib.keyboard.action;
 
 /**
- * KeyboardParams initialization
+ * JKeyboardParams initialization
  * @author Jing Yang
  *
  */
@@ -13,12 +13,12 @@ public interface Inputable {
      */
 	int getPopupKeyboardIndex();
 	/**
-	 * KeyboardParams.INPUTTYPE_XXX, only support INPUTTYPE_NUM for now
+	 * JKeyboardParams.INPUTTYPE_XXX, only support INPUTTYPE_NUM for now
 	 * @return
 	 */
 	public int getInputType();
 	/**
-	 * KeyboardParams.KBD_XXX, only support KBD_BOTTOM_XX for now
+	 * JKeyboardParams.KBD_XXX, only support KBD_BOTTOM_XX for now
 	 * @return
 	 */
 	public int getShowMode();

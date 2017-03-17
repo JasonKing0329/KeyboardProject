@@ -3,7 +3,7 @@ package com.jing.lib.keyboard.controller;
 import com.jing.lib.keyboard.R;
 import com.jing.lib.keyboard.action.CandidateListener;
 import com.jing.lib.keyboard.action.UIAction;
-import com.jing.lib.keyboard.provider.KeyboardParams;
+import com.jing.lib.keyboard.provider.JKeyboardParams;
 import com.jing.lib.keyboard.view.CandidateView;
 import com.jing.lib.keyboard.view.Keyboard;
 import com.jing.lib.keyboard.view.layout.LayoutKeyboardView;
@@ -82,13 +82,13 @@ public class PopUIController extends BaseUIController implements UIAction {
 		int bottom = pos[1] + mEditText.getHeight();
 		int distance = mScreenHeight - bottom;
 
-		if (mInputable.getShowMode() == KeyboardParams.KBD_FORCE_BOTTOM_SQUEEZE) {
+		if (mInputable.getShowMode() == JKeyboardParams.KBD_FORCE_BOTTOM_SQUEEZE) {
 			distance = mKbdHeight;
 		}
 		else {
 			// editText位置不会被键盘覆盖，squeeze模式下仍然挤压屏幕，平移模式下不平移屏幕
 			if (distance > mKbdHeight) {
-				if (mInputable.getShowMode() == KeyboardParams.KBD_BOTTOM_SQUEEZE) {
+				if (mInputable.getShowMode() == JKeyboardParams.KBD_BOTTOM_SQUEEZE) {
 					distance = mKbdHeight;
 				}
 				else {
@@ -106,7 +106,7 @@ public class PopUIController extends BaseUIController implements UIAction {
 		FrameLayout.LayoutParams cParams = (FrameLayout.LayoutParams) mContentView.getLayoutParams();
 		cParams.height = mScreenHeight - distance;
 //		cParams.bottomMargin = distance;
-		if (mInputable.getShowMode() != KeyboardParams.KBD_BOTTOM_SQUEEZE && mInputable.getShowMode() != KeyboardParams.KBD_FORCE_BOTTOM_SQUEEZE) {
+		if (mInputable.getShowMode() != JKeyboardParams.KBD_BOTTOM_SQUEEZE && mInputable.getShowMode() != JKeyboardParams.KBD_FORCE_BOTTOM_SQUEEZE) {
 			cParams.topMargin = -distance;
 		}
 		mContentView.setLayoutParams(cParams);

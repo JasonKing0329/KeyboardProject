@@ -5,13 +5,13 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import com.jing.lib.keyboard.action.Inputable;
+import com.jing.lib.keyboard.provider.JKeyboardParams;
 import com.jing.lib.keyboard.provider.JKeyboardView;
-import com.jing.lib.keyboard.provider.KeyboardParams;
-import com.jing.lib.keyboard.provider.KeyboardUtil;
+import com.jing.lib.keyboard.provider.JKeyboardUtil;
 
 public class KbdDemoActivity extends AppCompatActivity {
 
-    private KeyboardUtil keyboardUtil;
+    private JKeyboardUtil keyboardUtil;
     private JKeyboardView keyboardView;
     private EditText numEdit;
     private EditText qwertyEdit;
@@ -41,12 +41,12 @@ public class KbdDemoActivity extends AppCompatActivity {
 
             @Override
             public int getInputType() {
-                return KeyboardParams.INPUTTYPE_NUM;
+                return JKeyboardParams.INPUTTYPE_NUM;
             }
 
             @Override
             public int getShowMode() {
-                return KeyboardParams.KBD_FORCE_BOTTOM_SQUEEZE;
+                return JKeyboardParams.KBD_FORCE_BOTTOM_SQUEEZE;
             }
 
             @Override
@@ -67,12 +67,12 @@ public class KbdDemoActivity extends AppCompatActivity {
 
             @Override
             public int getInputType() {
-                return KeyboardParams.INPUTTYPE_NORMAL;
+                return JKeyboardParams.INPUTTYPE_NORMAL;
             }
 
             @Override
             public int getShowMode() {
-                return KeyboardParams.KBD_FORCE_BOTTOM_SQUEEZE;
+                return JKeyboardParams.KBD_FORCE_BOTTOM_SQUEEZE;
             }
 
             @Override
@@ -89,7 +89,7 @@ public class KbdDemoActivity extends AppCompatActivity {
     }
 
     private void testPopKeyboard() {
-        keyboardUtil = new KeyboardUtil(this);
+        keyboardUtil = new JKeyboardUtil(this);
         keyboardUtil.setXmlResources(new int[] {
                 R.xml.kbd_qwerty, R.xml.kbd_number
         });
@@ -102,12 +102,12 @@ public class KbdDemoActivity extends AppCompatActivity {
 
             @Override
             public int getInputType() {
-                return KeyboardParams.INPUTTYPE_NUM;
+                return JKeyboardParams.INPUTTYPE_NUM;
             }
 
             @Override
             public int getShowMode() {
-                return KeyboardParams.KBD_FORCE_BOTTOM_SQUEEZE;
+                return JKeyboardParams.KBD_FORCE_BOTTOM_SQUEEZE;
             }
 
             @Override
@@ -129,12 +129,12 @@ public class KbdDemoActivity extends AppCompatActivity {
 
             @Override
             public int getInputType() {
-                return KeyboardParams.INPUTTYPE_NORMAL;
+                return JKeyboardParams.INPUTTYPE_NORMAL;
             }
 
             @Override
             public int getShowMode() {
-                return KeyboardParams.KBD_BOTTOM_SQUEEZE;
+                return JKeyboardParams.KBD_BOTTOM_SQUEEZE;
             }
 
             @Override

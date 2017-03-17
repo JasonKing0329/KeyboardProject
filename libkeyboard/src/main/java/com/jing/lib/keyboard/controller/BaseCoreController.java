@@ -9,7 +9,7 @@ import com.jing.lib.keyboard.action.KeyboardHandler;
 import com.jing.lib.keyboard.action.OnKeyClickListener;
 import com.jing.lib.keyboard.action.OnKeyboardActionListener;
 import com.jing.lib.keyboard.action.UIAction;
-import com.jing.lib.keyboard.provider.KeyboardParams;
+import com.jing.lib.keyboard.provider.JKeyboardParams;
 
 /**
  * 描述: 核心控制器，调度UI和INPUT部分
@@ -104,7 +104,7 @@ public abstract class BaseCoreController implements KeyboardHandler, OnKeyClickL
     @Override
     public void onDone(String text) {
         if (mOnKeyboardActionListener != null) {
-            mOnKeyboardActionListener.onKeyboardAction(mEditText, text, KeyboardParams.ACTION_DONE);
+            mOnKeyboardActionListener.onKeyboardAction(mEditText, text, JKeyboardParams.ACTION_DONE);
         }
         mUiAction.hideKeyboard();
     }

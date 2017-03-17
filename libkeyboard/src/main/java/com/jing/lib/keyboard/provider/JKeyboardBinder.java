@@ -24,7 +24,7 @@ import java.util.Map;
  */
 public class JKeyboardBinder {
 
-    private final String TAG = "KeyboardUtil";
+    private final String TAG = "JKeyboardUtil";
     private EditText mEditText;
 
     private Context mContext;
