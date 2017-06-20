@@ -1,12 +1,10 @@
 package com.jing.lib.keyboard.view.layout;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.TextView;
 
 import com.jing.lib.keyboard.view.AbsTextKey;
@@ -32,7 +30,7 @@ public class LayoutTextKey extends AbsTextKey {
 			mTextView.setText(text);
 		}
 		if (textSize != -1) {
-			mTextView.setTextSize(textSize);
+			mTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize);
 		}
 		if (backgroundResId != -1) {
 			mTextView.setBackgroundResource(backgroundResId);
@@ -45,14 +43,18 @@ public class LayoutTextKey extends AbsTextKey {
 
 	@Override
 	public void setBackground(int resId) {
-		mTextView.setBackgroundResource(resId);
 		backgroundResId = resId;
+		if (backgroundResId != -1 && mTextView != null) {
+			mTextView.setBackgroundResource(backgroundResId);
+		}
 	}
 
 	@Override
 	public void setBackground(Drawable drawable) {
-		mTextView.setBackgroundDrawable(drawable);
 		background = drawable;
+		if (mTextView != null) {
+			mTextView.setBackgroundDrawable(drawable);
+		}
 	}
 
 //	@Override
@@ -86,7 +88,7 @@ public class LayoutTextKey extends AbsTextKey {
 
 	@Override
 	public void setTextSize(int size) {
-		mTextView.setTextSize(size);
+		mTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, size);
 		textSize = size;
 	}
 }

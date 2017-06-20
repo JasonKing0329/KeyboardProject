@@ -12,7 +12,6 @@ import com.jing.lib.keyboard.action.Inputable;
 import com.jing.lib.keyboard.action.KeyboardBinder;
 import com.jing.lib.keyboard.action.OnKeyboardActionListener;
 import com.jing.lib.keyboard.controller.PopCoreController;
-import com.jing.lib.keyboard.view.AbsKeyboardView;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -68,6 +67,48 @@ public class JKeyboardUtil implements KeyboardBinder {
         return false;
     }
 
+    @Override
+    public void showKeyboard(EditText edit) {
+        edit.requestFocus();
+        edit.setText("");
+        mController.setEditText(edit);
+
+        int type = edit.getInputType();
+        if (android.os.Build.VERSION.SDK_INT < 14) {
+            edit.setInputType(InputType.TYPE_NULL);
+        }
+        hideSoftInputMethod(mActivity, edit);
+
+        // 初始化键盘
+        if (mEditText == null) {
+            mEditText = edit;
+            mController.setInputable(inputableMap.get(edit));
+            initKeyboard(inputableMap.get(edit).getPopupKeyboardIndex());
+        }
+        else {
+            // 重复点击当前绑定的EditText
+            if (edit == mEditText) {
+                // 执行过返回键隐藏键盘
+                if (!isKbdShowing) {
+                    showExistedKeyboard();
+                }
+            }
+            // 切换EditText
+            else {
+                mController.updateEditText(edit);
+                mController.setInputable(inputableMap.get(edit));
+                showExistedDefaultKeyboard();
+            }
+
+        }
+
+        if (android.os.Build.VERSION.SDK_INT < 14) {
+            edit.setInputType(type);
+        }
+
+        mEditText = edit;
+    }
+
     public void setXmlResources(int[] xmlIds) {
         keyboardXmlRes = xmlIds;
     }
@@ -77,45 +118,7 @@ public class JKeyboardUtil implements KeyboardBinder {
         @Override
         public boolean onTouch(View editText, MotionEvent event) {
 
-            EditText edit = (EditText) editText;
-            edit.requestFocus();
-            edit.setText("");
-            mController.setEditText(edit);
-
-            int type = edit.getInputType();
-            if (android.os.Build.VERSION.SDK_INT < 14) {
-                edit.setInputType(InputType.TYPE_NULL);
-            }
-            hideSoftInputMethod(mActivity, edit);
-
-            // 初始化键盘
-            if (mEditText == null) {
-                mEditText = edit;
-                mController.setInputable(inputableMap.get(edit));
-                initKeyboard(inputableMap.get(edit).getPopupKeyboardIndex());
-            }
-            else {
-                // 重复点击当前绑定的EditText
-                if (editText == mEditText) {
-                    // 执行过返回键隐藏键盘
-                    if (!isKbdShowing) {
-                        showExistedKeyboard();
-                    }
-                }
-                // 切换EditText
-                else {
-                    mController.updateEditText(edit);
-                    mController.setInputable(inputableMap.get(edit));
-                    showExistedDefaultKeyboard();
-                }
-
-            }
-
-            if (android.os.Build.VERSION.SDK_INT < 14) {
-                edit.setInputType(type);
-            }
-
-            mEditText = edit;
+            showKeyboard((EditText) editText);
             return false;
         }
 

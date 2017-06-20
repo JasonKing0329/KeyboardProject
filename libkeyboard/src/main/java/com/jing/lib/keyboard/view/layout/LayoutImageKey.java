@@ -52,12 +52,18 @@ public class LayoutImageKey extends AbsImageKey {
 
 	@Override
 	public void setBackground(int resId) {
-
+		backgroundResId = resId;
+		if (backgroundResId != -1 && mLayout != null) {
+			mLayout.setBackgroundResource(backgroundResId);
+		}
 	}
 
 	@Override
 	public void setBackground(Drawable drawable) {
-		
+		background = drawable;
+		if (mLayout != null) {
+			mLayout.setBackgroundDrawable(drawable);
+		}
 	}
 
 	@Override

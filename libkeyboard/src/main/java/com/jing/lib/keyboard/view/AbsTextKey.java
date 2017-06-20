@@ -8,6 +8,9 @@ public abstract class AbsTextKey extends AbsKey {
     public String text;
     public int textColor;
 
+    /**
+     * 单位是dp
+     */
     public int textSize;
 
     public AbsTextKey() {

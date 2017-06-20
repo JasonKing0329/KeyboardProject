@@ -147,6 +147,7 @@ public class KbdDemoActivity extends AppCompatActivity {
                 return true;
             }
         });
+        keyboardUtil.showKeyboard(qwertyEdit);
     }
 
     @Override

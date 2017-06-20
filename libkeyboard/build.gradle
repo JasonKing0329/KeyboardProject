@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "1.2.1"
+version = "1.2.2"
 def siteUrl = 'https://github.com/JasonKing0329/KeyboardProject'
 def gitUrl = 'https://github.com/JasonKing0329/KeyboardProject.git'
 group = "com.jing.lib.keyboard"
@@ -14,8 +14,8 @@ android {
     defaultConfig {
         minSdkVersion 9
         targetSdkVersion 25
-        versionCode 5
-        versionName "1.2.1"
+        versionCode 6
+        versionName "1.2.2"
     }
     buildTypes {
         release {
@@ -36,6 +36,7 @@ task sourcesJar(type: Jar) {
 
 artifacts {
     archives sourcesJar
+    //archives javadocJar //非必须
 }
 
 install {
@@ -86,3 +87,21 @@ bintray {
         publish = true
     }
 }
+
+// javadoc 非必须
+//task javadoc(type: Javadoc) {
+//    options.encoding = "UTF-8" // 设置编码，否则中文可能会提示出错
+//    source = android.sourceSets.main.java.srcDirs
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//}
+//
+//task javadocJar(type: Jar, dependsOn: javadoc) {
+//    classifier = 'javadoc'
+//    from javadoc.destinationDir
+//}
+
+// 在Terminal里依次执行以下命令
+//gradlew javadocJar //非必须执行选项
+//gradlew sourcesJar
+//gradlew install
+//gradlew bintrayUpload

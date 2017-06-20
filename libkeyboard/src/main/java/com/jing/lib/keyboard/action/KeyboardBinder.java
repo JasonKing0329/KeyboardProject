@@ -25,4 +25,6 @@ public interface KeyboardBinder {
 	 * @return
 	 */
 	public boolean hideKeyboard();
+
+    void showKeyboard(EditText qwertyEdit);
 }

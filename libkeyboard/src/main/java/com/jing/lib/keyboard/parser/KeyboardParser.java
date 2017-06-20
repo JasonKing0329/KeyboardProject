@@ -62,6 +62,10 @@ public class KeyboardParser {
 					// keyTextSize
 					String sKeyTextSize = parser.getAttributeValue(null, KeyboardTag.ATTR_KEY_TEXT_SIZE);
 					int keyTextSize = parseDimen(keyboard.getContext(), sKeyTextSize);
+					//px转换为dp
+					if (keyTextSize != -1) {
+						keyTextSize = DensityUtil.px2dip(keyboard.getContext(), keyTextSize);
+					}
 					keyboard.setKeyTextSize(keyTextSize);
 					// keyMargin
 					String sKeyMargin = parser.getAttributeValue(null, KeyboardTag.ATTR_KEY_MARGIN);
@@ -146,6 +150,8 @@ public class KeyboardParser {
 						String sKeyTextSize = parser.getAttributeValue(null, KeyboardTag.ATTR_KEY_TEXT_SIZE);
 						if (sKeyTextSize != null) {
 							akey.textSize = parseDimen(keyboard.getContext(), sKeyTextSize);
+							//px转换为dp
+							akey.textSize = DensityUtil.px2dip(keyboard.getContext(), akey.textSize);
 						}
 					}
 					key.setCode(parser.getAttributeValue(null, KeyboardTag.ATTR_CODE));
@@ -156,6 +162,9 @@ public class KeyboardParser {
 						int keyWidth = parseDimen(keyboard.getContext(), sKeyWidth);
 						key.setWidth(keyWidth);
 					}
+					// keyBackground, key单独的背景颜色
+					String sKeyBg = parser.getAttributeValue(null, KeyboardTag.ATTR_KEY_BACKGROUND);
+					key.backgroundResId = parseResourceId(keyboard.getContext(), sKeyBg);
 				}
 				break;
 			case XmlPullParser.END_TAG:
@@ -179,6 +188,12 @@ public class KeyboardParser {
 		}
 	}
 
+	/**
+	 *
+	 * @param context
+	 * @param dimen
+	 * @return 返回以px为单位
+	 */
 	private int parseDimen(Context context, String dimen) {
 		if (dimen == null) {
 			return  -1;
