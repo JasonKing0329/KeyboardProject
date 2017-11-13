@@ -36,7 +36,7 @@
     <com.jing.lib.keyboard.provider.JKeyboardView
         android:id="@+id/kbd_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="170dp"
         android:layout_above="@id/text_bottom"
         app:xml="@xml/kbd_number"/>
 </RelativeLayout>

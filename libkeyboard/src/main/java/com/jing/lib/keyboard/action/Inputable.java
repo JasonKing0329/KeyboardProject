@@ -32,4 +32,10 @@ public interface Inputable {
 	 * @return
 	 */
 	public boolean sychronizeWithEditText();
+
+	/**
+	 * 切换动画执行时长
+	 * @return
+	 */
+    int getSwitchAnimTime();
 }

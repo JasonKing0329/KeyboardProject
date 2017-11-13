@@ -2,4 +2,18 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--键盘-->
+    <dimen name="kbd_num_width">85dp</dimen>
+    <dimen name="kbd_num_height">36dp</dimen>
+    <dimen name="kbd_num_ver_space">8dp</dimen>
+    <dimen name="kbd_num_hor_space">15dp</dimen>
+    <dimen name="kbd_text_size">18dp</dimen>
+    <dimen name="kbd_qwerty_width">25dp</dimen>
+    <dimen name="kbd_qwerty_ver_space">16dp</dimen>
+    <dimen name="kbd_qwerty_hor_space">4dp</dimen>
+    <dimen name="kbd_qwerty_wide_width">40dp</dimen>
+    <dimen name="kbd_qwerty_line2_left">14dp</dimen>
+    <dimen name="kbd_delete_width">20dp</dimen>
+    <dimen name="kbd_delete_height">14dp</dimen>
 </resources>

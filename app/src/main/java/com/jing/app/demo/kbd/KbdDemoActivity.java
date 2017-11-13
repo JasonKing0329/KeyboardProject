@@ -58,6 +58,11 @@ public class KbdDemoActivity extends AppCompatActivity {
             public boolean sychronizeWithEditText() {
                 return true;
             }
+
+            @Override
+            public int getSwitchAnimTime() {
+                return 500;
+            }
         });
         keyboardView.addInputArea(qwertyEdit, new Inputable() {
             @Override
@@ -83,6 +88,11 @@ public class KbdDemoActivity extends AppCompatActivity {
             @Override
             public boolean sychronizeWithEditText() {
                 return true;
+            }
+
+            @Override
+            public int getSwitchAnimTime() {
+                return 500;
             }
         });
         keyboardView.show(numEdit);
@@ -119,6 +129,11 @@ public class KbdDemoActivity extends AppCompatActivity {
             public boolean sychronizeWithEditText() {
                 return true;
             }
+
+            @Override
+            public int getSwitchAnimTime() {
+                return 500;
+            }
         });
 
         keyboardUtil.bindEditText(qwertyEdit, new Inputable() {
@@ -145,6 +160,11 @@ public class KbdDemoActivity extends AppCompatActivity {
             @Override
             public boolean sychronizeWithEditText() {
                 return true;
+            }
+
+            @Override
+            public int getSwitchAnimTime() {
+                return 500;
             }
         });
         keyboardUtil.showKeyboard(qwertyEdit);

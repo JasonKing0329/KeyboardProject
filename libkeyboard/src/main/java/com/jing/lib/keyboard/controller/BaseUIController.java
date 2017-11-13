@@ -81,7 +81,7 @@ public abstract class BaseUIController implements UIAction {
             Keyboard keyboard = new KeyboardController().initKeyboard(mContext, xmlId);
             keyboardMap.put(xmlId, keyboard);
         }
-        mKeyboardView.onSwitchKeyboardType(keyboardMap.get(xmlId));
+        mKeyboardView.onSwitchKeyboardType(keyboardMap.get(xmlId), mInputable.getSwitchAnimTime());
     }
 
     @Override

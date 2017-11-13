@@ -28,7 +28,7 @@ public class LayoutKeyboard extends Keyboard implements View.OnClickListener {
 		if (mBgRes != -1) {
 			container.setBackgroundResource(mBgRes);
 		}
-		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, mKbdHeight);
+		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
 		// row by row
 		int rows = mRowList.size();

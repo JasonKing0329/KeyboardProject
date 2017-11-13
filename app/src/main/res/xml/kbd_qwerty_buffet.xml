@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Keyboard height="150dp"
+<Keyboard
     background="#00ffffff"
-    keyWidth="25dp"
-    keyHeight="36dp"
-    verticalSpace="16dp"
-    horizontalSpace="4dp"
-    keyTextColor="@color/kbd_qwerty_text"
-    keyBackground="@drawable/selector_kbd_bg">
+    keyWidth="@dimen/kbd_qwerty_width"
+    keyHeight="@dimen/kbd_num_height"
+    verticalSpace="@dimen/kbd_qwerty_ver_space"
+    horizontalSpace="@dimen/kbd_qwerty_hor_space"
+    keyTextColor="@color/light_black"
+    keyTextSize="@dimen/kbd_text_size"
+    keyBackground="@drawable/selector_kbd_bg"
+    gravity="bottom|center_horizontal">
     <Row>
         <Key code="Q" text="Q"/>
         <Key code="W" text="W"/>
@@ -19,7 +21,7 @@
         <Key code="O" text="O"/>
         <Key code="P" text="P"/>
     </Row>
-    <Row marginLeft="14dp">
+    <Row marginLeft="@dimen/kbd_qwerty_line2_left">
         <Key code="A" text="A"/>
         <Key code="S" text="S"/>
         <Key code="D" text="D"/>
@@ -31,7 +33,7 @@
         <Key code="L" text="L"/>
     </Row>
     <Row>
-        <Key code="Switch" text="@string/kbd_switch_num" keyWidth="40dp"/>
+        <Key code="Switch" text="@string/kbd_switch_num" keyWidth="@dimen/kbd_qwerty_wide_width"/>
         <Key code="Z" text="Z"/>
         <Key code="X" text="X"/>
         <Key code="C" text="C"/>
@@ -39,6 +41,6 @@
         <Key code="B" text="B"/>
         <Key code="N" text="N"/>
         <Key code="M" text="M"/>
-        <Key code="Delete" src="@drawable/kbd_key_delete" imgWidth="@dimen/symbol_delete_size" imgHeight="@dimen/symbol_delete_size" keyWidth="40dp"/>
+        <Key code="Delete" src="@drawable/ic_key_delete" imgWidth="@dimen/kbd_delete_width" imgHeight="@dimen/kbd_delete_height" keyWidth="@dimen/kbd_qwerty_wide_width"/>
     </Row>
 </Keyboard>

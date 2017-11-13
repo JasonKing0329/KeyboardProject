@@ -150,7 +150,7 @@ public class InputController implements InputAction {
 		}
 		// 切换
 		else if (JKeyboardParams.KEYCODE_SWITCH.equals(keyCode)) {
-			mKeyboardHandler.onSwitchKeyboard();;
+			mKeyboardHandler.onSwitchKeyboard();
 		}
 		// 完成
 		else if (JKeyboardParams.KEYCODE_DONE.equals(keyCode)) {

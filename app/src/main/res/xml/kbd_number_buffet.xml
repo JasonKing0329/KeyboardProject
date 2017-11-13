@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Keyboard height="170dp"
+<Keyboard
     background="#00ffffff"
-    keyWidth="85dp"
-    keyHeight="36dp"
-    verticalSpace="8dp"
-    horizontalSpace="15dp"
-    keyTextColor="@color/kbd_symbol_text"
+    keyWidth="@dimen/kbd_num_width"
+    keyHeight="@dimen/kbd_num_height"
+    verticalSpace="@dimen/kbd_num_ver_space"
+    horizontalSpace="@dimen/kbd_num_hor_space"
+    keyTextColor="@color/light_black"
+    keyTextSize="@dimen/kbd_text_size"
     keyBackground="@drawable/selector_kbd_bg"
+    gravity="bottom|center_horizontal"
     divider="0px">
     <Row>
         <Key code="1" text="1"/>
@@ -26,6 +28,6 @@
     <Row>
         <Key code="Switch" text="@string/kbd_switch_abc"/>
         <Key code="0" text="0"/>
-        <Key code="Delete" src="@drawable/kbd_key_delete" imgWidth="@dimen/symbol_delete_size" imgHeight="@dimen/symbol_delete_size"/>
+        <Key code="Delete" src="@drawable/ic_key_delete" imgWidth="@dimen/kbd_delete_width" imgHeight="@dimen/kbd_delete_height"/>
     </Row>
 </Keyboard>

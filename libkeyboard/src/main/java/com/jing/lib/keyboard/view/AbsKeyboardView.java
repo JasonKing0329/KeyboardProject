@@ -29,7 +29,7 @@ public abstract class AbsKeyboardView extends RelativeLayout {
 
 	protected abstract void initKeyboard();
 
-	public abstract void onSwitchKeyboardType(Keyboard keyboard);
+	public abstract void onSwitchKeyboardType(Keyboard keyboard, int animTime);
 
 	public void setCandidateView(CandidateView view) {
 		mCandidateView = view;
