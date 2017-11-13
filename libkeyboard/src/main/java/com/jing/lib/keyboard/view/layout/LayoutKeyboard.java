@@ -2,10 +2,10 @@ package com.jing.lib.keyboard.view.layout;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.jing.lib.keyboard.view.AbsKey;
 import com.jing.lib.keyboard.view.AbsTextKey;
@@ -36,13 +36,23 @@ public class LayoutKeyboard extends Keyboard implements View.OnClickListener {
 			for (int i = 0; i < rows; i ++) {
 				LinearLayout rowLayout = new LinearLayout(getContext());
 				rowLayout.setOrientation(LinearLayout.HORIZONTAL);
-				int realRowHeight = mRowHeight - mRowList.get(i).marginTop - mRowList.get(i).marginBottom;
-				LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, realRowHeight);
+				LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+				// divider
 				if (mDivider != -1) {
 					lParams.topMargin = mDivider;
 				}
+				// marginTop
 				lParams.topMargin += mRowList.get(i).marginTop;
 				lParams.bottomMargin += mRowList.get(i).marginBottom;
+				// verticalSpace
+				if (i > 0 && mVerticalSpace != -1) {
+					lParams.topMargin += mVerticalSpace;
+				}
+				// marginLeft
+				lParams.leftMargin += mRowList.get(i).marginLeft;
+				// marginRight
+				lParams.rightMargin += mRowList.get(i).marginRight;
+
 				container.addView(rowLayout, lParams);
 
 				List<AbsKey> mKeyList = mRowList.get(i).mKeyList;
@@ -66,6 +76,7 @@ public class LayoutKeyboard extends Keyboard implements View.OnClickListener {
 					key.getView().setTag(key);
 					key.getView().setOnClickListener(this);
 
+					// Width优先级 Key width > Row keyWidth > Keyboard keyWidth
 					int width = mKeyWidth;
 					if (key.getWidth() > -1) {
 						width = key.getWidth();
@@ -73,9 +84,20 @@ public class LayoutKeyboard extends Keyboard implements View.OnClickListener {
 					else if (mRowList.get(i).keyWidth > -1) {
 						width = mRowList.get(i).keyWidth;
 					}
+					// Height优先级 Key height > Row keyHeight > Keyboard keyHeight > Keyboard rowHeight
+					int height = mKeyHeight;
+					if (key.getHeight() > -1) {
+						height = key.getHeight();
+					}
+					else if (mRowList.get(i).keyHeight > -1) {
+						height = mRowList.get(i).keyHeight;
+					}
+					if (height == -1) {
+						height = mRowHeight;
+					}
 
 					// 背景需要在margin以内
-					LinearLayout.LayoutParams cParams = new LinearLayout.LayoutParams(width - 2*mKeyMargin, realRowHeight - 2*mKeyMargin);
+					LinearLayout.LayoutParams cParams = new LinearLayout.LayoutParams(width, height);
 					// divider
 					if (mDivider != -1) {
 						cParams.leftMargin = mDivider;
@@ -90,11 +112,42 @@ public class LayoutKeyboard extends Keyboard implements View.OnClickListener {
 						cParams.rightMargin = mKeyMargin;
 						cParams.bottomMargin = mKeyMargin;
 					}
+					// horizontalSpace
+					if (j > 0 && mHorizongtalSpace != -1) {
+						cParams.leftMargin += mHorizongtalSpace;
+					}
 					rowLayout.addView(key.getView(), cParams);
 				}
 
 			}
 		}
+
+		switch (mGravity) {
+			case Gravity.BOTTOM:
+				params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+				break;
+			case Gravity.RIGHT:
+				params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+				break;
+			case Gravity.CENTER:
+				params.addRule(RelativeLayout.CENTER_IN_PARENT);
+				break;
+			case Gravity.CENTER_HORIZONTAL:
+				params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+				break;
+			case Gravity.CENTER_VERTICAL:
+				params.addRule(RelativeLayout.CENTER_VERTICAL);
+				break;
+			case Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL:
+				params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+				params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+				break;
+			case Gravity.RIGHT | Gravity.CENTER_VERTICAL:
+				params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+				params.addRule(RelativeLayout.CENTER_VERTICAL);
+				break;
+		}
+
 		addView(container, params);
 	}
 

@@ -31,7 +31,7 @@ public class KbdDemoActivity extends AppCompatActivity {
     private void testEmbedKeyboard() {
         keyboardView = (JKeyboardView) findViewById(R.id.kbd_view);
         keyboardView.setXmlResources(new int[] {
-                R.xml.kbd_qwerty, R.xml.kbd_number
+                R.xml.kbd_qwerty_buffet, R.xml.kbd_number_buffet
         });
         keyboardView.addInputArea(numEdit, new Inputable() {
             @Override

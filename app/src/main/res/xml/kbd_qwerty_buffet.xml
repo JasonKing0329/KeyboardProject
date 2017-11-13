@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Keyboard height="150dp"
+    background="#00ffffff"
+    keyWidth="25dp"
+    keyHeight="36dp"
+    verticalSpace="16dp"
+    horizontalSpace="4dp"
+    keyTextColor="@color/kbd_qwerty_text"
+    keyBackground="@drawable/selector_kbd_bg">
+    <Row>
+        <Key code="Q" text="Q"/>
+        <Key code="W" text="W"/>
+        <Key code="E" text="E"/>
+        <Key code="R" text="R"/>
+        <Key code="T" text="T"/>
+        <Key code="Y" text="Y"/>
+        <Key code="U" text="U"/>
+        <Key code="I" text="I"/>
+        <Key code="O" text="O"/>
+        <Key code="P" text="P"/>
+    </Row>
+    <Row marginLeft="14dp">
+        <Key code="A" text="A"/>
+        <Key code="S" text="S"/>
+        <Key code="D" text="D"/>
+        <Key code="F" text="F"/>
+        <Key code="G" text="G"/>
+        <Key code="H" text="H"/>
+        <Key code="J" text="J"/>
+        <Key code="K" text="K"/>
+        <Key code="L" text="L"/>
+    </Row>
+    <Row>
+        <Key code="Switch" text="@string/kbd_switch_num" keyWidth="40dp"/>
+        <Key code="Z" text="Z"/>
+        <Key code="X" text="X"/>
+        <Key code="C" text="C"/>
+        <Key code="V" text="V"/>
+        <Key code="B" text="B"/>
+        <Key code="N" text="N"/>
+        <Key code="M" text="M"/>
+        <Key code="Delete" src="@drawable/kbd_key_delete" imgWidth="@dimen/symbol_delete_size" imgHeight="@dimen/symbol_delete_size" keyWidth="40dp"/>
+    </Row>
+</Keyboard>

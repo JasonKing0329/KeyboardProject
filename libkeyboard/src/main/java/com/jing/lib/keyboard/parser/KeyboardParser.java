@@ -7,9 +7,9 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-import android.app.Activity;
 import android.content.Context;
-import android.util.DisplayMetrics;
+import android.text.TextUtils;
+import android.view.Gravity;
 
 import com.jing.lib.keyboard.tool.DensityUtil;
 import com.jing.lib.keyboard.view.AbsImageKey;
@@ -51,6 +51,10 @@ public class KeyboardParser {
 					String sKeyWidth = parser.getAttributeValue(null, KeyboardTag.ATTR_KEY_WIDTH);
 					int keyWidth = parseDimen(keyboard.getContext(), sKeyWidth);
 					keyboard.setKeyWidth(keyWidth);
+					// keyHeight
+					String sKeyHeight = parser.getAttributeValue(null, KeyboardTag.ATTR_KEY_HEIGHT);
+					int keyHeight = parseDimen(keyboard.getContext(), sKeyHeight);
+					keyboard.setKeyHeight(keyHeight);
 					// divider
 					String sDivider = parser.getAttributeValue(null, KeyboardTag.ATTR_DIVIDER);
 					int divider = parseDimen(keyboard.getContext(), sDivider);
@@ -79,6 +83,18 @@ public class KeyboardParser {
 					String sKeyBg = parser.getAttributeValue(null, KeyboardTag.ATTR_KEY_BACKGROUND);
 					int keyBg = parseResourceId(keyboard.getContext(), sKeyBg);
 					keyboard.setKeyBgRes(keyBg);
+					// verticalSpace
+					String sVerticalSpace = parser.getAttributeValue(null, KeyboardTag.ATTR_VERTICAL_SPACE);
+					int verticalSpace = parseDimen(keyboard.getContext(), sVerticalSpace);
+					keyboard.setVerticalSpace(verticalSpace);
+					// horizontalSpace
+					String sHorizontalSpace = parser.getAttributeValue(null, KeyboardTag.ATTR_HORIZONTAL_SPACE);
+					int horizontalSpace = parseDimen(keyboard.getContext(), sHorizontalSpace);
+					keyboard.setHorizongtalSpace(horizontalSpace);
+					// gravity
+					String sGravity = parser.getAttributeValue(null, KeyboardTag.ATTR_GRAVITY);
+					int gravity = parseGravity(sGravity);
+					keyboard.setGravity(gravity);
 				}
 				else if (name.equals(KeyboardTag.ROW)) {
 					row = keyboard.new Row();
@@ -86,6 +102,11 @@ public class KeyboardParser {
 					if (sKeyWidth != null) {
 						int keyWidth = parseDimen(keyboard.getContext(), sKeyWidth);
 						row.keyWidth = keyWidth;
+					}
+					String sKeyHeight = parser.getAttributeValue(null, KeyboardTag.ATTR_KEY_HEIGHT);
+					if (sKeyHeight != null) {
+						int keyHeight = parseDimen(keyboard.getContext(), sKeyHeight);
+						row.keyHeight = keyHeight;
 					}
 					// marginTop
 					String sMarginTop = parser.getAttributeValue(null, KeyboardTag.ATTR_MARGIN_TOP);
@@ -99,6 +120,20 @@ public class KeyboardParser {
 					if (sMarginBottom != null) {
 						int marginBottom = parseDimen(keyboard.getContext(), sMarginBottom);
 						row.marginBottom = marginBottom;
+					}
+
+					// marginLeft
+					String sMarginLeft = parser.getAttributeValue(null, KeyboardTag.ATTR_MARGIN_LEFT);
+					if (sMarginLeft != null) {
+						int marginLeft = parseDimen(keyboard.getContext(), sMarginLeft);
+						row.marginLeft = marginLeft;
+					}
+
+					// marginRight
+					String sMarginRight = parser.getAttributeValue(null, KeyboardTag.ATTR_MARGIN_RIGHT);
+					if (sMarginRight != null) {
+						int marginRight = parseDimen(keyboard.getContext(), sMarginRight);
+						row.marginRight = marginRight;
 					}
 				}
 				else if (name.equals(KeyboardTag.KEY)) {
@@ -162,6 +197,12 @@ public class KeyboardParser {
 						int keyWidth = parseDimen(keyboard.getContext(), sKeyWidth);
 						key.setWidth(keyWidth);
 					}
+					// keyHeight
+					String sKeyHeight = parser.getAttributeValue(null, KeyboardTag.ATTR_KEY_HEIGHT);
+					if (sKeyHeight != null) {
+						int keyHeight = parseDimen(keyboard.getContext(), sKeyHeight);
+						key.setHeight(keyHeight);
+					}
 					// keyBackground, key单独的背景颜色
 					String sKeyBg = parser.getAttributeValue(null, KeyboardTag.ATTR_KEY_BACKGROUND);
 					key.backgroundResId = parseResourceId(keyboard.getContext(), sKeyBg);
@@ -186,6 +227,53 @@ public class KeyboardParser {
 			}
 			event = parser.next();
 		}
+	}
+
+	private int parseGravity(String sGravity) {
+		if (!TextUtils.isEmpty(sGravity)) {
+			String array[] = sGravity.split("\\|");
+			List<Integer> list = new ArrayList<>();
+			for (String grav:array) {
+				if (grav.equals("bottom")) {
+					list.add(Gravity.BOTTOM);
+				}
+				else if (grav.equals("top")) {
+					list.add(Gravity.TOP);
+				}
+				else if (grav.equals("center")) {
+					list.add(Gravity.CENTER);
+				}
+				else if (grav.equals("center_horizontal")) {
+					list.add(Gravity.CENTER_HORIZONTAL);
+				}
+				else if (grav.equals("center_vertical")) {
+					list.add(Gravity.CENTER_VERTICAL);
+				}
+				else if (grav.equals("right")) {
+					list.add(Gravity.RIGHT);
+				}
+				else if (grav.equals("left")) {
+					list.add(Gravity.LEFT);
+				}
+				else if (grav.equals("end")) {
+					list.add(Gravity.END);
+				}
+				else if (grav.equals("start")) {
+					list.add(Gravity.START);
+				}
+			}
+			int result = -1;
+			for (int gravity:list) {
+				if (result == -1) {
+					result = gravity;
+				}
+				else {
+					result = result | gravity;
+				}
+			}
+			return result;
+		}
+		return -1;
 	}
 
 	/**

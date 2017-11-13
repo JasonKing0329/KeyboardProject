@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Keyboard height="170dp"
+    background="#00ffffff"
+    keyWidth="85dp"
+    keyHeight="36dp"
+    verticalSpace="8dp"
+    horizontalSpace="15dp"
+    keyTextColor="@color/kbd_symbol_text"
+    keyBackground="@drawable/selector_kbd_bg"
+    divider="0px">
+    <Row>
+        <Key code="1" text="1"/>
+        <Key code="2" text="2"/>
+        <Key code="3" text="3"/>
+    </Row>
+    <Row>
+        <Key code="4" text="4"/>
+        <Key code="5" text="5"/>
+        <Key code="6" text="6"/>
+    </Row>
+    <Row>
+        <Key code="7" text="7"/>
+        <Key code="8" text="8"/>
+        <Key code="9" text="9"/>
+    </Row>
+    <Row>
+        <Key code="Switch" text="@string/kbd_switch_abc"/>
+        <Key code="0" text="0"/>
+        <Key code="Delete" src="@drawable/kbd_key_delete" imgWidth="@dimen/symbol_delete_size" imgHeight="@dimen/symbol_delete_size"/>
+    </Row>
+</Keyboard>

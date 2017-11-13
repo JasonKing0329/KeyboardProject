@@ -14,21 +14,30 @@ public abstract class Keyboard extends RelativeLayout {
 	protected int mBgRes;
 	protected int mKbdHeight = -1;
 	protected int mKeyWidth = -1;
+	protected int mKeyHeight = -1;
 	protected int mRowHeight = -1;
 	protected int mKeyBgRes = -1;
 	protected int mKeyTextColor = -1;
 	protected int mKeyTextSize = -1;
 	protected int mKeyMargin = -1;
 	protected int mDivider = -1;
+	protected int mVerticalSpace = -1;
+	protected int mHorizongtalSpace = -1;
+	protected int mGravity = -1;
 	protected OnKeyClickListener mOnKeyClickListener;
 
 	public class Row {
 		public List<AbsKey> mKeyList;
 		public int keyWidth = -1;
+		public int keyHeight = -1;
 		// 允许为0
 		public int marginTop;
 		// 允许为0
 		public int marginBottom;
+		// 允许为0
+		public int marginLeft;
+		// 允许为0
+		public int marginRight;
 	}
 	
 	public Keyboard(Context context) {
@@ -58,6 +67,14 @@ public abstract class Keyboard extends RelativeLayout {
 
 	public void setKeyWidth(int mKeyWidth) {
 		this.mKeyWidth = mKeyWidth;
+	}
+
+	public int getKeyHeight() {
+		return mKeyHeight;
+	}
+
+	public void setKeyHeight(int mKeyHeight) {
+		this.mKeyHeight = mKeyHeight;
 	}
 
 	public int getRowHeight() {
@@ -90,6 +107,18 @@ public abstract class Keyboard extends RelativeLayout {
 
 	public void setDivider(int size) {
 		this.mDivider = size;
+	}
+
+	public void setVerticalSpace(int mVerticalSpace) {
+		this.mVerticalSpace = mVerticalSpace;
+	}
+
+	public void setHorizongtalSpace(int mHorizongtalSpace) {
+		this.mHorizongtalSpace = mHorizongtalSpace;
+	}
+
+	public void setGravity(int mGravity) {
+		this.mGravity = mGravity;
 	}
 
 	public void setOnKeyClickListener(OnKeyClickListener listener) {
