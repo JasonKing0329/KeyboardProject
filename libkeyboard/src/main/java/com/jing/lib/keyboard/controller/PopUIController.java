@@ -52,7 +52,6 @@ public class PopUIController extends BaseUIController implements UIAction {
 //		mCandidateHeight = context.getResources().getDimensionPixelSize(R.dimen.tv_kbd_candidate_height);
 //		mKbdHeight = context.getResources().getDimensionPixelSize(R.dimen.tv_kbd_height);
 		mCandidateHeight = dp2Px(context, 30);
-		mKbdHeight = dp2Px(context, 204);
 		mScreenHeight = getScreenHeight(context);
 		mScreenWidth = getScreenWidth(context);
 	}
@@ -137,6 +136,7 @@ public class PopUIController extends BaseUIController implements UIAction {
 		mKeyboardView.setCandidateView(mCandidateView);
 		int xmlId = keyboardXmls[curKbdIndex];
 		Keyboard keyboard = new KeyboardController().initKeyboard(getContext(), xmlId);
+		mKbdHeight = keyboard.getKbdHeight();
 		mKeyboardView.setOnKeyClickListener(onKeyClickListener);
 		// 保存keyboard view实例，用于切换
 		keyboardMap.put(xmlId, keyboard);

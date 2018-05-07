@@ -28,7 +28,7 @@ public class LayoutKeyboard extends Keyboard implements View.OnClickListener {
 		if (mBgRes != -1) {
 			container.setBackgroundResource(mBgRes);
 		}
-		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, mKbdHeight);
 
 		// row by row
 		int rows = mRowList.size();
@@ -111,6 +111,12 @@ public class LayoutKeyboard extends Keyboard implements View.OnClickListener {
 						cParams.topMargin = mKeyMargin;
 						cParams.rightMargin = mKeyMargin;
 						cParams.bottomMargin = mKeyMargin;
+					}
+					if (key.margin != null) {
+						cParams.leftMargin += key.margin.left;
+						cParams.topMargin += key.margin.top;
+						cParams.rightMargin += key.margin.right;
+						cParams.bottomMargin += key.margin.bottom;
 					}
 					// horizontalSpace
 					if (j > 0 && mHorizongtalSpace != -1) {

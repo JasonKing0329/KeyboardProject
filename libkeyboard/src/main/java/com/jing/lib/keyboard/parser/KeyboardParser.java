@@ -206,6 +206,34 @@ public class KeyboardParser {
 					// keyBackground, key单独的背景颜色
 					String sKeyBg = parser.getAttributeValue(null, KeyboardTag.ATTR_KEY_BACKGROUND);
 					key.backgroundResId = parseResourceId(keyboard.getContext(), sKeyBg);
+
+					// marginTop
+					String sMarginTop = parser.getAttributeValue(null, KeyboardTag.ATTR_MARGIN_TOP);
+					if (sMarginTop != null) {
+						int marginTop = parseDimen(keyboard.getContext(), sMarginTop);
+						key.setMarginTop(marginTop);
+					}
+
+					// marginBottom
+					String sMarginBottom = parser.getAttributeValue(null, KeyboardTag.ATTR_MARGIN_BOTTOM);
+					if (sMarginBottom != null) {
+						int marginBottom = parseDimen(keyboard.getContext(), sMarginBottom);
+						key.setMarginBottom(marginBottom);
+					}
+
+					// marginLeft
+					String sMarginLeft = parser.getAttributeValue(null, KeyboardTag.ATTR_MARGIN_LEFT);
+					if (sMarginLeft != null) {
+						int marginLeft = parseDimen(keyboard.getContext(), sMarginLeft);
+						key.setMarginLeft(marginLeft);
+					}
+
+					// marginRight
+					String sMarginRight = parser.getAttributeValue(null, KeyboardTag.ATTR_MARGIN_RIGHT);
+					if (sMarginRight != null) {
+						int marginRight = parseDimen(keyboard.getContext(), sMarginRight);
+						key.setMarginRight(marginRight);
+					}
 				}
 				break;
 			case XmlPullParser.END_TAG:

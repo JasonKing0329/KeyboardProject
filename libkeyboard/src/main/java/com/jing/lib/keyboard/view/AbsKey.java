@@ -67,4 +67,32 @@ public abstract class AbsKey {
     public void setMargin(int left, int top, int right, int bottom) {
         margin = new Rect(left, top, right, bottom);
     }
+
+    public void setMarginTop(int top) {
+        if (margin == null) {
+            margin = new Rect();
+        }
+        margin.top = top;
+    }
+
+    public void setMarginLeft(int left) {
+        if (margin == null) {
+            margin = new Rect();
+        }
+        margin.left = left;
+    }
+
+    public void setMarginRight(int right) {
+        if (margin == null) {
+            margin = new Rect();
+        }
+        margin.right = right;
+    }
+
+    public void setMarginBottom(int bottom) {
+        if (margin == null) {
+            margin = new Rect();
+        }
+        margin.bottom = bottom;
+    }
 }
