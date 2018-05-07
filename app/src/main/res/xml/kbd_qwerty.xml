@@ -2,7 +2,7 @@
 <Keyboard height="@dimen/tv_kbd_height"
     background="@color/kbd_qwerty_bg"
     keyWidth="10%p"
-    rowHeight="@dimen/qwerty_key_height"
+    keyHeight="57dp"
     keyTextColor="@color/kbd_qwerty_text"
     keyBackground="@drawable/btn_kbd_qwerty"
     keyMargin="@dimen/kbd_qwerty_key_margin">

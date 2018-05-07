@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "1.2.2"
+version = "1.2.5"
 def siteUrl = 'https://github.com/JasonKing0329/KeyboardProject'
 def gitUrl = 'https://github.com/JasonKing0329/KeyboardProject.git'
 group = "com.jing.lib.keyboard"
@@ -14,8 +14,8 @@ android {
     defaultConfig {
         minSdkVersion 9
         targetSdkVersion 25
-        versionCode 8
-        versionName "1.2.4"
+        versionCode 9
+        versionName "1.2.5"
     }
     buildTypes {
         release {

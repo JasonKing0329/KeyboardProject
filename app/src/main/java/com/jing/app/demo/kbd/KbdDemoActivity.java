@@ -24,8 +24,8 @@ public class KbdDemoActivity extends AppCompatActivity {
         numEdit = (EditText) findViewById(R.id.edit_num);
         qwertyEdit = (EditText) findViewById(R.id.edit_qwerty);
 
-//        testPopKeyboard();
-        testEmbedKeyboard();
+        testPopKeyboard();
+//        testEmbedKeyboard();
     }
 
     private void testEmbedKeyboard() {

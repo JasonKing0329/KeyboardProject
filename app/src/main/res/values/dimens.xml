@@ -16,4 +16,16 @@
     <dimen name="kbd_qwerty_line2_left">14dp</dimen>
     <dimen name="kbd_delete_width">20dp</dimen>
     <dimen name="kbd_delete_height">14dp</dimen>
+    <dimen name="symbol_key_height">51dp</dimen>
+    <dimen name="qwerty_key_height">68dp</dimen>
+    <dimen name="qwerty_padding_ver">9dp</dimen>
+    <dimen name="qwerty_margin_ver">15dp</dimen>
+    <dimen name="qwerty_padding_hor">3dp</dimen>
+    <dimen name="qwerty_margin_hor">3dp</dimen>
+    <dimen name="tv_kbd_height">204dp</dimen>
+    <dimen name="tv_kbd_margin_content">5dp</dimen>
+    <dimen name="tv_kbd_candidate_height">32dp</dimen>
+    <dimen name="symbol_delete_size">25dp</dimen>
+    <dimen name="kbd_symbol_divider">1px</dimen>
+    <dimen name="kbd_qwerty_key_margin">2dp</dimen>
 </resources>

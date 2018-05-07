@@ -1,6 +1,5 @@
 package com.jing.lib.keyboard.controller;
 
-import com.jing.lib.keyboard.R;
 import com.jing.lib.keyboard.action.CandidateListener;
 import com.jing.lib.keyboard.action.UIAction;
 import com.jing.lib.keyboard.provider.JKeyboardParams;
@@ -49,9 +48,11 @@ public class PopUIController extends BaseUIController implements UIAction {
 
 	public PopUIController(Context context) {
 		super(context);
-		
-		mCandidateHeight = context.getResources().getDimensionPixelSize(R.dimen.tv_kbd_candidate_height);
-		mKbdHeight = context.getResources().getDimensionPixelSize(R.dimen.tv_kbd_height);
+
+//		mCandidateHeight = context.getResources().getDimensionPixelSize(R.dimen.tv_kbd_candidate_height);
+//		mKbdHeight = context.getResources().getDimensionPixelSize(R.dimen.tv_kbd_height);
+		mCandidateHeight = dp2Px(context, 30);
+		mKbdHeight = dp2Px(context, 204);
 		mScreenHeight = getScreenHeight(context);
 		mScreenWidth = getScreenWidth(context);
 	}
@@ -190,6 +191,16 @@ public class PopUIController extends BaseUIController implements UIAction {
 		DisplayMetrics dm = new DisplayMetrics();
 		((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(dm);
 		return dm.widthPixels;
+	}
+
+	/**
+	 * dp转px
+	 * @param context
+	 * @param dp
+	 * @return
+	 */
+	public static int dp2Px(Context context, int dp) {
+		return (int) (context.getResources().getDisplayMetrics().density * dp + 0.5);
 	}
 
 }

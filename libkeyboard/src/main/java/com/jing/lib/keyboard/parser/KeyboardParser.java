@@ -8,6 +8,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.Gravity;
 
@@ -61,8 +62,8 @@ public class KeyboardParser {
 					keyboard.setDivider(divider);
 					// keyTextColor
 					String sKeyTextColor = parser.getAttributeValue(null, KeyboardTag.ATTR_KEY_TEXT_COLOR);
-					int keyTextColor = parseResourceId(keyboard.getContext(), sKeyTextColor);
-					keyboard.setKeyTextColor(keyboard.getContext().getResources().getColor(keyTextColor));
+					int keyTextColor = parseColor(keyboard.getContext(), sKeyTextColor);
+					keyboard.setKeyTextColor(keyTextColor);
 					// keyTextSize
 					String sKeyTextSize = parser.getAttributeValue(null, KeyboardTag.ATTR_KEY_TEXT_SIZE);
 					int keyTextSize = parseDimen(keyboard.getContext(), sKeyTextSize);
@@ -178,8 +179,7 @@ public class KeyboardParser {
 						// textColor
 						String sKeyTextColor = parser.getAttributeValue(null, KeyboardTag.ATTR_KEY_TEXT_COLOR);
 						if (sKeyTextColor != null) {
-							akey.textColor = parseResourceId(keyboard.getContext(), sKeyTextColor);
-							akey.textColor = keyboard.getContext().getResources().getColor(akey.textColor);
+							akey.textColor = parseColor(keyboard.getContext(), sKeyTextColor);
 						}
 						// textSize
 						String sKeyTextSize = parser.getAttributeValue(null, KeyboardTag.ATTR_KEY_TEXT_SIZE);
@@ -294,11 +294,38 @@ public class KeyboardParser {
 				float rate = Float.parseFloat(dimen.split("%")[0]) / 100f;
 				return (int) (DensityUtil.getScreenWidth(context) * rate);
 			}
-			if (dimen.endsWith("dp")) {
+			else if (dimen.endsWith("dp")) {
 				try {
 					int index = dimen.indexOf("dp");
 					float fdp = Float.parseFloat(dimen.substring(0, index));
 					return DensityUtil.dip2px(context, fdp);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			else if (dimen.endsWith("dip")) {
+				try {
+					int index = dimen.indexOf("dip");
+					float fdp = Float.parseFloat(dimen.substring(0, index));
+					return DensityUtil.dip2px(context, fdp);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			else if (dimen.endsWith("sp")) {
+				try {
+					int index = dimen.indexOf("sp");
+					float fdp = Float.parseFloat(dimen.substring(0, index));
+					return DensityUtil.dip2px(context, fdp);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			else if (dimen.endsWith("px")) {
+				try {
+					int index = dimen.indexOf("px");
+					float fdp = Float.parseFloat(dimen.substring(0, index));
+					return (int) fdp;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -312,15 +339,33 @@ public class KeyboardParser {
 		return 0;
 	}
 
+	private int parseColor(Context context, String res) {
+		if (res == null) {
+			return  -1;
+		}
+		if (res.startsWith("#")) {
+			return Color.parseColor(res);
+		}
+		else {
+			return context.getResources().getColor(parseResourceId(context, res));
+		}
+	}
+
 	private int parseResourceId(Context context, String res) {
 		if (res == null) {
 			return  -1;
 		}
-		if (res.startsWith("@") && res.contains("/")) {
-			String[] array = res.substring(1).split("/");
-			String type = array[0];
-			String resName = array[1];
-			return context.getResources().getIdentifier(resName, type, context.getPackageName());
+		if (res.startsWith("@")) {
+			if (res.contains("/")) {
+				String[] array = res.substring(1).split("/");
+				String type = array[0];
+				String resName = array[1];
+				return context.getResources().getIdentifier(resName, type, context.getPackageName());
+			}
+			// android 26 or 27开始会将xml里引用的@dimen/color/string等资源自动全部翻译为资源id值，例如"@dimen/kbd_height"解析出来是"@214321545"
+			else {
+				return Integer.parseInt(res.substring(1));
+			}
 		}
 //		try{  
 //			 Field field=R.drawable.class.getField("icon");  
@@ -331,4 +376,5 @@ public class KeyboardParser {
 //			}
 		return -1;
 	}
+
 }

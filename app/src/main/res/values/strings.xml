@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">KeyboardProject</string>
+    <string name="kbd_complete">Done</string>
+    <string name="kbd_clear">C</string>
+    <string name="kbd_switch_abc">ABC</string>
+    <string name="kbd_switch_num">123</string>
+    <string name="kbd_clear_qwerty">清空</string>
 </resources>
