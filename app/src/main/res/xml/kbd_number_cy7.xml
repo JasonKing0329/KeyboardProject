@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Keyboard height="@dimen/kbd_height_cy7"
+    background="@color/kbd_qwerty_bg"
+    keyWidth="30%p"
+    keyHeight="50dp"
+    keyTextColor="#333333"
+    keyTextSize="18dp"
+    keyBackground="@drawable/btn_kbd"
+    keyMargin="3dp">
+    <Row marginTop="8dp" marginLeft="9dp">
+        <Key code="1" text="1\n"/>
+        <Key code="2" text="2\nABC"/>
+        <Key code="3" text="3\nDEF"/>
+
+    </Row>
+    <Row marginTop="0dp" marginLeft="9dp">
+        <Key code="4" text="4\nGHI"/>
+        <Key code="5" text="5\nJKL"/>
+        <Key code="6" text="6\nMNO"/>
+    </Row>
+    <Row marginTop="0dp" marginLeft="9dp">
+        <Key code="7" text="7\nPQRS"/>
+        <Key code="8" text="8\nTUV"/>
+        <Key code="9" text="9\nWXYZ"/>
+    </Row>
+    <Row marginTop="0dp" marginLeft="9dp" keyWidth="22.2%p">
+        <Key code="Switch" text="切换"/>
+        <Key code="0" text="0"/>
+        <Key code="Clear" text="清空"/>
+        <Key code="Delete" src="@drawable/btn_del" imgWidth="8.6%p" imgHeight="5.3%p"/>
+    </Row>
+</Keyboard>

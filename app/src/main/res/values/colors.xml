@@ -6,7 +6,7 @@
     <color name="dark_black">#333</color>
     <color name="light_black">#666</color>
 
-    <color name="kbd_qwerty_bg">#d2d5db</color>
+    <color name="kbd_qwerty_bg">#eaebee</color>
     <color name="kbd_qwerty_text">#3c3c3c</color>
     <color name="kbd_symbol_bg">#8c8c8c</color>
     <color name="kbd_symbol_key_bg">#ffffff</color>

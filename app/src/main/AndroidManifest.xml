@@ -9,6 +9,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".KbdDemoActivity">
+        </activity>
+        <activity android:name=".KeyboardCy7Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

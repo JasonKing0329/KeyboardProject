@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Keyboard height="@dimen/kbd_height_cy7"
+    background="@color/kbd_qwerty_bg"
+    keyWidth="7.9%p"
+    keyHeight="65dp"
+    keyTextColor="#333333"
+    keyTextSize="18dp"
+    keyBackground="@drawable/btn_kbd"
+    keyMargin="3dp">
+    <Row marginTop="8dp" marginLeft="7dp">
+        <Key code="q" text="q"/>
+        <Key code="w" text="w"/>
+        <Key code="e" text="e"/>
+        <Key code="r" text="r"/>
+        <Key code="t" text="t"/>
+        <Key code="y" text="y"/>
+        <Key code="u" text="u"/>
+        <Key code="i" text="i"/>
+        <Key code="o" text="o"/>
+        <Key code="p" text="p"/>
+    </Row>
+    <Row marginTop="4dp" marginLeft="7dp">
+        <Key code="a" text="a"/>
+        <Key code="s" text="s"/>
+        <Key code="d" text="d"/>
+        <Key code="f" text="f"/>
+        <Key code="g" text="g"/>
+        <Key code="h" text="h"/>
+        <Key code="j" text="j"/>
+        <Key code="k" text="k"/>
+        <Key code="l" text="l"/>
+        <Key code="Clear" text="清空" marginTop="-11dp"/>
+    </Row>
+    <Row marginTop="4dp" marginBottom="0dp" marginLeft="7dp">
+        <Key code="Switch" text="切换" keyWidth="12.5%p" keyTextSize="16dp"/>
+        <Key code="z" text="z"/>
+        <Key code="x" text="x"/>
+        <Key code="c" text="c"/>
+        <Key code="v" text="v"/>
+        <Key code="b" text="b"/>
+        <Key code="n" text="n"/>
+        <Key code="m" text="m"/>
+        <Key code="Delete" src="@drawable/btn_del" imgWidth="8.6%p" imgHeight="5.3%p" keyWidth="12.5%p"/>
+    </Row>
+</Keyboard>

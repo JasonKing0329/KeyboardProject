@@ -8,14 +8,13 @@ def gitUrl = 'https://github.com/JasonKing0329/KeyboardProject.git'
 group = "com.jing.lib.keyboard"
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 27
 
     defaultConfig {
-        minSdkVersion 9
-        targetSdkVersion 25
+        minSdkVersion 15
+        targetSdkVersion 27
         versionCode 10
-        versionName "1.2.6"
+        versionName "1.2.7"
     }
     buildTypes {
         release {

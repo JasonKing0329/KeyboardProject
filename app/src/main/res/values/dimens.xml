@@ -28,4 +28,5 @@
     <dimen name="symbol_delete_size">25dp</dimen>
     <dimen name="kbd_symbol_divider">1px</dimen>
     <dimen name="kbd_qwerty_key_margin">2dp</dimen>
+    <dimen name="kbd_height_cy7">240dp</dimen>
 </resources>
